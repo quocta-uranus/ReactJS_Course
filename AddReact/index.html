@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    
+
+
+    <title>React JS</title>
+</head>
+<body>
+    
+    <script>
+        //DOM
+        const h1DOM = document.createElement('h1');
+        h1DOM.title = 'Hello Word';
+        h1DOM.className = 'heading';
+        h1DOM.innerText = 'Hello guys';
+
+        document.body.appendChild(h1DOM);
+         
+    //React
+    const h1React = React.createElement('h1', {
+        title: 'Hello World',
+        className: 'heading',
+        
+    },'Hello everyone');
+   console.dir(h1DOM);
+   console.log(h1React);
+        const ulDOM = document.createElement('ul');
+        ulDOM.id = 'ul-id';
+        ulDOM.style = 'color: red;font-size: 30px';
+        const liDOM1 = document.createElement('li');
+        liDOM1.innerText = 'Javascript';
+        liDOM1.id = 'li-1'
+        const liDOM2 = document.createElement('li');
+        liDOM2.innerText = 'ReactJS';
+        ulDOM.appendChild(liDOM1);
+        ulDOM.appendChild(liDOM2);
+
+        document.body.appendChild(ulDOM);
+
+        const ulReact = React.createElement(
+            'ul',
+             {
+                 id: 'ul-id',
+                 style: 'color: blue ;font-size: 30px' 
+             },
+                React.createElement('li', {id : 'li-1'} ,'Javascript'),
+                React.createElement('li', null, 'ReactJS')
+               );
+        console.log(ulDOM);
+        console.log(ulReact);
+
+            // const postItem = React.createElement(
+            //     'div',
+            //     {
+            //         className: 'post-item'
+            //     },
+            //     React.createElement(
+            //         'h2',
+            //         {
+            //             title: ''
+            //         }
+                    
+                    
+            //     )
+            // )
+
+    </script>
+</body>
+</html>
