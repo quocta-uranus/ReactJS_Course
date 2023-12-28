@@ -2,6 +2,7 @@
 import{useState} from 'react';
 
 
+import Content from './Content'
 
 // const courses = [
 //   {
@@ -126,34 +127,43 @@ function   App() {
 //   </div>
 // )
 /////////////////////////////////////////////////
-const storageJobs = localStorage.getItem('jobs')
-  const [job, setJob] = useState('')
-  const [jobs,setJobs] = useState([])
-  const handleSubmit = () => {
-    setJobs(prev => {
-      const newJobs= [...prev, job]
-      const jsonJobs = JSON.stringify(newJobs)
-      localStorage.setItem('jobs', jsonJobs)
-      return newJobs
-    })
-    setJob('')
-  }
-  return (
+// const storageJobs = localStorage.getItem('jobs')
+//   const [job, setJob] = useState('')
+//   const [jobs,setJobs] = useState([])
+//   const handleSubmit = () => {
+//     setJobs(prev => {
+//       const newJobs= [...prev, job]
+//       const jsonJobs = JSON.stringify(newJobs)
+//       localStorage.setItem('jobs', jsonJobs)
+//       return newJobs
+//     })
+//     setJob('')
+//   }
+//   return (
 
-    <div className="App" style={{padding : 32}}>
-      <input
-       value={job} 
-       onChange={e => setJob(e.target.value)}
-       />
-      <button onClick = {handleSubmit}>ADD</button>
-      <ul>
-        {jobs.map((job, index) => (
-          <li key={index}>{job}</li>
-        ))}
-      </ul>
+//     <div className="App" style={{padding : 32}}>
+//       <input
+//        value={job} 
+//        onChange={e => setJob(e.target.value)}
+//        />
+//       <button onClick = {handleSubmit}>ADD</button>
+//       <ul>
+//         {jobs.map((job, index) => (
+//           <li key={index}>{job}</li>
+//         ))}
+//       </ul>
 
+//       </div>
+//   )
+//////////////////////////////////////////////////
+const[show, setShow] = useState(false)
+
+    return (
+      <div className="App" style={{textAlign:"center"}}>
+        <button onClick = {() => setShow(!show)}>Show</button>
+        {show && <Content/>}
       </div>
-  )
+    )
 }
 
 export default App;
