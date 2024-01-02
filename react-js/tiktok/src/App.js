@@ -156,14 +156,18 @@ function   App() {
 //       </div>
 //   )
 //////////////////////////////////////////////////
-const[show, setShow] = useState(false)
 
-    return (
-      <div className="App" style={{textAlign:"center"}}>
-        <button onClick = {() => setShow(!show)}>Show</button>
-        {show && <Content/>}
-      </div>
-    )
+const [show, setShow] = useState(false);
+
+  return (
+    <div className="App" style={{ padding: 20 }}>
+      {!show && (
+        <button onClick={() => setShow(!show)}>Khóa học React tại F8</button>
+      )}
+      {show && <button onClick={() => setShow(!show)}>Trang chủ</button>}
+      {show && <Content />}
+    </div>
+  );
 }
 
 export default App;

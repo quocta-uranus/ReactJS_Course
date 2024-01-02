@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
 // 
 // const tabs = ['posts', 'comments', 'albums', 'photos', 'todos', 'users']
+
+const lessons = [
+    {
+      id: 1,
+      name: "ReactJS là gì? Tại sao nên học ReactJS?",
+    },
+    {
+      id: 2,
+      name: "SPA/MPA là gì?",
+    },
+    {
+      id: 3,
+      name: "Ưu điểm của SPA",
+    },
+  ];
 function Content() {
 
     // 1. useEffect(callback)
@@ -107,31 +122,63 @@ function Content() {
     //     </div>
     // )
     ////////////////////////
-    const [avatar, setAvatar] = useState()
+    // const [avatar, setAvatar] = useState()
+    // useEffect(() => {
+    //     //Clear up
+    //     return () => {
+    //       avatar &&  URL.revokeObjectURL(avatar.preview)   
+    //     }
+    // },[avatar])
+
+    // const handlePreviewAvatar = (e) => {
+    //     const file = e.target.files[0]
+    //     file.preview = URL.createObjectURL(file)
+    //     setAvatar(file)
+
+    // }
+    // return (
+    //     <div>
+    //         <input
+    //          type = "file"
+    //          onChange= {handlePreviewAvatar}
+
+    //         />
+    //         {avatar && (
+    //         <img src = {avatar.preview} alt = "" width = "80%"/>
+    //         )}
+    //     </div>
+    // )
+////////////////////////////////////////////////////////////////
+    const [room, setRoom] = useState(1);
+
     useEffect(() => {
-        //Clear up
-        return () => {
-          avatar &&  URL.revokeObjectURL(avatar.preview)   
-        }
-    },[avatar])
-
-    const handlePreviewAvatar = (e) => {
-        const file = e.target.files[0]
-        file.preview = URL.createObjectURL(file)
-        setAvatar(file)
-
-    }
+      const handleEvent = (e) => {
+        console.log(e.detail);
+      };
+  
+      window.addEventListener(`lesson-${room}`, handleEvent);
+  
+      return () => {
+        window.removeEventListener(`lesson-${room}`, handleEvent);
+      };
+    }, [room]);
+  
     return (
-        <div>
-            <input
-             type = "file"
-             onChange= {handlePreviewAvatar}
+      <div className="main">
+        <ul>
+          {lessons.map((lesson) => (
+            <div key={lesson.id}>
+              <li
+                style={room === lesson.id ? { color: "red" } : {}}
+                onClick={() => setRoom(lesson.id)}
+              >
+                {lesson.id}. {lesson.name}
+              </li>
+            </div>
+          ))}
+        </ul>
+      </div>
+    );
 
-            />
-            {avatar && (
-            <img src = {avatar.preview} alt = "" width = "80%"/>
-            )}
-        </div>
-    )
 }
 export default Content
