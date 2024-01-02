@@ -12,9 +12,9 @@ const element = React.createElement('div', { className: 'container' }, 'Hello, W
     React.createElement(type,{props},children);
 ```
 
-`type`: loại phần tử HTML (h1,p, nút, v.v.).
-`props`: thuộc tính của đối tượng ({style:{size:10px}} hoặc Eventhandlers, classNames, v.v.).
-`children`: bất cứ thứ gì cần được bao bọc bởi thành phần đó.
+- `type`: loại phần tử HTML (h1,p, nút, v.v.).
+- `props`: thuộc tính của đối tượng ({style:{size:10px}} hoặc Eventhandlers, classNames, v.v.).
+- `children`: bất cứ thứ gì cần được bao bọc bởi thành phần đó.
 
 
 ## **JSX**
@@ -55,11 +55,11 @@ const element = <Welcome name="Kelvin" />;
 `YARN` là một công cụ quản lý gói (package manager) cho JavaScript, tương tự như npm (Node Package Manager). Yarn được phát triển bởi Facebook, Google, Exponent và Tilde. Nó cung cấp một cách hiệu quả và nhanh chóng để quản lý các phụ thuộc (dependencies) và các gói trong các dự án JavaScript.
 ## **HOOK** 
 **Hook** giúp bạn tái sử dụng logic, giảm thiểu lặp lại mã, và làm cho các thành phần hàm trở nên mạnh mẽ và linh hoạt hơn.
-`useState`: Hook này cho phép bạn sử dụng trạng thái trong thành phần hàm
-`useEffect`: Hook này giúp bạn thực hiện các tác vụ sau khi thành phần đã render hoặc sau mỗi lần render
-`useContext`: Cho phép bạn sử dụng Context trong các thành phần hàm.
-`useReducer`: Tương tự như useState, nhưng sử dụng một hàm reducer để quản lý trạng thái phức tạp hơn
-`useMemo` và `useCallback`: Được sử dụng để tối ưu hóa hiệu suất. useMemo giúp bạn lưu kết quả của một hàm được tính toán và chỉ tính toán lại khi các giá trị dependencies thay đổi. useCallback giúp tránh việc tạo lại các hàm callback mỗi khi render.
+- `useState`: Hook này cho phép bạn sử dụng trạng thái trong thành phần hàm
+- `useEffect`: Hook này giúp bạn thực hiện các tác vụ sau khi thành phần đã render hoặc sau mỗi lần render
+- `useContext`: Cho phép bạn sử dụng Context trong các thành phần hàm.
+- `useReducer`: Tương tự như useState, nhưng sử dụng một hàm reducer để quản lý trạng thái phức tạp hơn
+- `useMemo` và `useCallback`: Được sử dụng để tối ưu hóa hiệu suất. useMemo giúp bạn lưu kết quả của một hàm được tính toán và chỉ tính toán lại khi các giá trị dependencies thay đổi. useCallback giúp tránh việc tạo lại các hàm callback mỗi khi render.
 
 #### useState
 
@@ -80,7 +80,7 @@ return (
 
 
 
-Two-way binding trong React
+**Two-way binding trong React**
 ```JavaScript 
 const courses = [
   {
@@ -131,7 +131,7 @@ const handleCheck = (id) => {
 ```
 
 
-Todolist with useState
+**Todolist with useState**
 ```JavaScript
     const storageJobs = localStorage.getItem('jobs')
    const [job, setJob] = useState('')
@@ -164,7 +164,7 @@ Todolist with useState
 ```
  
 
-Mounted & Unmounted
+**Mounted & Unmounted**
 ```JavaScript
 
     const[show, setShow] = useState(false)
@@ -177,11 +177,11 @@ Mounted & Unmounted
 ```
 
 
-useEffect
+#### useEffect
 
 
 
-useEffect with dependencies
+**useEffect with dependencies**
 
   ```JavaScript
   const [title, setTitle] = useState('')
@@ -243,7 +243,7 @@ useEffect with dependencies
      );
   ```
 
-useEffect with DOM events
+**useEffect with DOM events**
 ```JavaScript
  const [width,setWidth] = useState(window.innerWidth)
     useEffect(() => {
@@ -262,7 +262,7 @@ useEffect with DOM events
     )
 ```
 
-useEffect with timer functions
+**useEffect with timer functions**
 
   ```JavaScript
     setInterval(() => {
@@ -283,7 +283,7 @@ useEffect with timer functions
      )
   ```
 
-useEffect with preview avatar
+**useEffect with preview avatar**
 
    ```JavaScript
       const [avatar, setAvatar] = useState()
@@ -316,6 +316,54 @@ useEffect with preview avatar
 
 
 useEffect with fake Chat App
+```JavaScript
+const lessons = [
+    {
+      id: 1,
+      name: "ReactJS là gì? Tại sao nên học ReactJS?",
+    },
+    {
+      id: 2,
+      name: "SPA/MPA là gì?",
+    },
+    {
+      id: 3,
+      name: "Ưu điểm của SPA",
+    },
+  ];
+
+ const [room, setRoom] = useState(1);
+
+    useEffect(() => {
+      const handleEvent = (e) => {
+        console.log(e.detail);
+      };
+  
+      window.addEventListener(`lesson-${room}`, handleEvent);
+  
+      return () => {
+        window.removeEventListener(`lesson-${room}`, handleEvent);
+      };
+    }, [room]);
+  
+    return (
+      <div className="main">
+        <ul>
+          {lessons.map((lesson) => (
+            <div key={lesson.id}>
+              <li
+                style={room === lesson.id ? { color: "red" } : {}}
+                onClick={() => setRoom(lesson.id)}
+              >
+                {lesson.id}. {lesson.name}
+              </li>
+            </div>
+          ))}
+        </ul>
+      </div>
+    );
+```
+
 
 useLayoutEffect 
 
