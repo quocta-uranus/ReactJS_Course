@@ -315,7 +315,7 @@ const handleCheck = (id) => {
    ```
 
 
-useEffect with fake Chat App
+**useEffect with fake Chat App**
 ```JavaScript
 const lessons = [
     {
@@ -364,8 +364,83 @@ const lessons = [
     );
 ```
 
+`useEffect`
+- 1. Cập nhật lại state
+- 2. Cập nhật DOM (mutated)
+- 3. Render lại UI
+- 4. Gọi cleanup nếu deps thay đổi
+- 5. Gọi useEffect callback
 
-useLayoutEffect 
+`useLayoutEffect` 
+- 1. Cập nhật lại state
+- 2. Cập nhật DOM (mutated)
+- 3. Gọi cleanup nếu deps thay đổi (sync)
+- 4. Gọi useLayoutEffect callback (sync)
+- 5. Render lại UI
+```JavaScript
+    const [count, setCount] = useState(0);
+    useLayoutEffect(() => {
+        if( count > 3 )
+        setCount(0)
+    
+    }, [count])
+    const handleRun = () => {
+        setCount(count + 1)
+    }
+    return (
+        <div>
+            <h1>{count}</h1>
+            <button onClick={handleRun}>Run</button>
+        </div>
+    )
+```
 
-useRef
+**useRef**
+
+`useRef` trong React được sử dụng để tạo một tham chiếu (reference) đến một phần tử DOM hoặc một giá trị có thể thay đổi mà không gây ra việc render lại lại component khi giá trị thay đổi.
+```JavaScript
+  const [count, setCount] = useState(60);
+    const timerId = useRef();
+    const prevCount = useRef();
+    useEffect(() => {
+      prevCount.current = count;
+    },[count])
+
+    const handleStart = () => {
+     timerId.current= setInterval(() => {
+        setCount((prevCount) => prevCount - 1)
+      },1000)
+    }
+    const handleStop = () => {
+      clearInterval(timerId.current);
+    }
+    return (
+        <div>
+            <h1 style={{padding: 20}}>{count}</h1>
+            <button  onClick = {handleStart}>Start</button>
+            <button onClick = {handleStop}>Stop</button>
+        </div>
+    )
+```
+React.memo HOC
+```JavaScript
+import {memo} from "react";
+function Content() {
+    return (
+        <div>
+            <h1>Content</h1>
+        </div>
+    )
+    }
+export default memo(Content)
+
+return (
+    <div>
+      <Content />
+      <h1 style={{padding: 20}}>{count}</h1>
+      <button onClick={increase}>Increase</button>
+      
+    </div>
+
+```
 
