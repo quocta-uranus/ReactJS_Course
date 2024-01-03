@@ -1,22 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import {memo} from "react";
 // 
 // const tabs = ['posts', 'comments', 'albums', 'photos', 'todos', 'users']
 
-const lessons = [
-    {
-      id: 1,
-      name: "ReactJS là gì? Tại sao nên học ReactJS?",
-    },
-    {
-      id: 2,
-      name: "SPA/MPA là gì?",
-    },
-    {
-      id: 3,
-      name: "Ưu điểm của SPA",
-    },
-  ];
-function Content() {
+// const lessons = [
+//     {
+//       id: 1,
+//       name: "ReactJS là gì? Tại sao nên học ReactJS?",
+//     },
+//     {
+//       id: 2,
+//       name: "SPA/MPA là gì?",
+//     },
+//     {
+//       id: 3,
+//       name: "Ưu điểm của SPA",
+//     },
+//   ];
+function Content({onIncrease}) {
+    return (
+        <div>
+            <h1>Content</h1>
+            <button onClick={onIncrease}>Increase</button>
+        </div>
+    )
+    // const [count, setCount] = useState(0);
+    // useLayoutEffect(() => {
+    //     if( count > 3 )
+    //     setCount(0)
+    
+    // }, [count])
+    // const handleRun = () => {
+    //     setCount(count + 1)
+    // }
+    // return (
+    //     <div>
+    //         <h1>{count}</h1>
+    //         <button onClick={handleRun}>Run</button>
+    //     </div>
+    // )
 
     // 1. useEffect(callback)
     // - Gọi callback mỗi khi component re-render
@@ -149,36 +171,36 @@ function Content() {
     //     </div>
     // )
 ////////////////////////////////////////////////////////////////
-    const [room, setRoom] = useState(1);
+    // const [room, setRoom] = useState(1);
 
-    useEffect(() => {
-      const handleEvent = (e) => {
-        console.log(e.detail);
-      };
+    // useEffect(() => {
+    //   const handleEvent = (e) => {
+    //     console.log(e.detail);
+    //   };
   
-      window.addEventListener(`lesson-${room}`, handleEvent);
+    //   window.addEventListener(`lesson-${room}`, handleEvent);
   
-      return () => {
-        window.removeEventListener(`lesson-${room}`, handleEvent);
-      };
-    }, [room]);
+    //   return () => {
+    //     window.removeEventListener(`lesson-${room}`, handleEvent);
+    //   };
+    // }, [room]);
   
-    return (
-      <div className="main">
-        <ul>
-          {lessons.map((lesson) => (
-            <div key={lesson.id}>
-              <li
-                style={room === lesson.id ? { color: "red" } : {}}
-                onClick={() => setRoom(lesson.id)}
-              >
-                {lesson.id}. {lesson.name}
-              </li>
-            </div>
-          ))}
-        </ul>
-      </div>
-    );
+    // return (
+    //   <div className="main">
+    //     <ul>
+    //       {lessons.map((lesson) => (
+    //         <div key={lesson.id}>
+    //           <li
+    //             style={room === lesson.id ? { color: "red" } : {}}
+    //             onClick={() => setRoom(lesson.id)}
+    //           >
+    //             {lesson.id}. {lesson.name}
+    //           </li>
+    //         </div>
+    //       ))}
+    //     </ul>
+    //   </div>
+    // );
 
 }
-export default Content
+export default memo(Content)

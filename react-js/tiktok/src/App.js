@@ -1,5 +1,5 @@
 
-import{useState} from 'react';
+import{useRef,useState,useEffect,useCallback} from 'react';
 
 
 import Content from './Content'
@@ -27,6 +27,45 @@ import Content from './Content'
 //     'Porsche'
 // ]
 function   App() {
+  const [count, setCount] = useState(0);
+  const handleIncrease = () => {
+    setCount(prevCount => prevCount + 1)
+  }
+  return (
+    <div>
+      <Content onIncrease = {handleIncrease} />
+      <h1 style={{padding: 20}}>{count}</h1>
+     
+      
+    </div>
+  )
+
+
+
+  ////////////////////////////////////////////////////////////////////////
+    // const [count, setCount] = useState(60);
+    // const timerId = useRef();
+    // const prevCount = useRef();
+    // useEffect(() => {
+    //   prevCount.current = count;
+    // },[count])
+
+    // const handleStart = () => {
+    //  timerId.current= setInterval(() => {
+    //     setCount((prevCount) => prevCount - 1)
+    //   },1000)
+    // }
+    // const handleStop = () => {
+    //   clearInterval(timerId.current);
+    // }
+    // return (
+    //     <div>
+    //         <h1 style={{padding: 20}}>{count}</h1>
+    //         <button  onClick = {handleStart}>Start</button>
+    //         <button onClick = {handleStop}>Stop</button>
+    //     </div>
+    // )
+  ////////////////////////////////////////////////////////////////////////
 //     const [gift, setGift] = useState()
 //     const randomGift = () => {
 //         const index = Math.floor(Math.random() * gifts.length)
@@ -157,17 +196,17 @@ function   App() {
 //   )
 //////////////////////////////////////////////////
 
-const [show, setShow] = useState(false);
+// const [show, setShow] = useState(false);
 
-  return (
-    <div className="App" style={{ padding: 20 }}>
-      {!show && (
-        <button onClick={() => setShow(!show)}>Khóa học React tại F8</button>
-      )}
-      {show && <button onClick={() => setShow(!show)}>Trang chủ</button>}
-      {show && <Content />}
-    </div>
-  );
+//   return (
+//     <div className="App" style={{ padding: 20 }}>
+//       {!show && (
+//         <button onClick={() => setShow(!show)}>Khóa học React tại F8</button>
+//       )}
+//       {show && <button onClick={() => setShow(!show)}>Trang chủ</button>}
+//       {show && <Content />}
+//     </div>
+//   );
 }
 
-export default App;
+export default App
