@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import {memo} from "react";
+import Paragraph from "./Paragraph";
 // 
 // const tabs = ['posts', 'comments', 'albums', 'photos', 'todos', 'users']
 
@@ -17,11 +18,10 @@ import {memo} from "react";
 //       name: "Ưu điểm của SPA",
 //     },
 //   ];
-function Content({onIncrease}) {
+function Content() {
     return (
         <div>
-            <h1>Content</h1>
-            <button onClick={onIncrease}>Increase</button>
+           <Paragraph  />
         </div>
     )
     // const [count, setCount] = useState(0);
