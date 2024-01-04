@@ -433,7 +433,7 @@ function Content() {
     )
     }
 export default memo(Content)
-
+//Khi sử dụng memo
 return (
     <div>
       <Content />
@@ -441,6 +441,215 @@ return (
       <button onClick={increase}>Increase</button>
       
     </div>
+)
 
 ```
+`useCallback` dùng để giúp tránh tạo ra những hám mới một cách không cần thiết trong function component
 
+`useMemo` giúp tránh thực hiện lại một logic nào đó không cần thiết
+```JavaScript
+const [name,setName] = useState('');
+const [price,setPrice] = useState('');
+const [products,setProducts] = useState([])
+
+const nameRef = useRef();
+const handleSubmit = () => {
+  setProducts ( [...products, {
+    name,
+    price : +price
+  }])
+  setName ( '')
+  setPrice ('')
+  nameRef.current.focus()
+}
+const total = useMemo(() => {
+  const result = products.reduce ((result, prod) =>{
+
+    return result + prod.price
+  },0)
+  return result
+},[products])
+
+
+ return (
+   <div style={{padding: '10px 32px'}}>
+    <input 
+    ref={nameRef}
+    value= {name}
+    placeholder="Enter name ..."
+    onChange={e => setName(e.target.value)}
+    />
+    <br />
+    <input
+    value={price}
+    placeholder='Enter price...'
+    onChange={e => setPrice(e.target.value)}
+    />
+    <br />
+    <button onClick={handleSubmit}>Submit</button>
+    <br />
+    Total price :{total}
+    <ul>
+      {products.map((product,index) => (
+        <li key={index}>{product.name} - {product.price}</li>
+      ))}
+    </ul>
+
+   </div>
+ )
+
+
+```
+`useReducer` Cung cấp cho người dùng có thêm một sự lựa chọn để sử dụng state cho function component
+
+
+`useState`
+- 1. Init state : 0
+- 2. Actions : Up(state + 1), Down(state - 1)
+
+`useReducer`
+- 1. Init state : 0
+- 2. Actions : Up(state + 1), Down(state - 1)
+- 3. Reducer 
+- 4. Dispatch
+
+```JavaScript
+//init 
+const initState = 0
+// actions
+const UP_ACTION = 'up'
+const DOWN_ACTION = 'down'
+//reducer
+const reducer = (state, action) => {
+    switch(action) {
+      case UP_ACTION: 
+        return state + 1
+      case DOWN_ACTION:
+        return state - 1
+      default:
+        throw new Error('Invalid action')
+    }
+}
+
+
+const [count, dispatch] = useReducer(reducer, initState)
+return (
+    <div style={{padding: ' 20px'}}>
+      <h1>{count}</h1>
+       <button 
+       onClick={() => dispatch(UP_ACTION)}
+       >Up
+       </button>
+       <button onClick={() => dispatch(DOWN_ACTION)}
+       >Down
+       </button>
+    </div>
+)
+```
+Todo App with useReducer hook
+```JavaScript
+const initState = {
+  job: '',
+  jobs: []
+}
+// 2. Actions
+const SET_JOB = 'set_job'
+const ADD_JOB = 'add_job'
+const DELETE_JOB = 'delete_job'
+
+const setJob = payload =>  {
+  return {
+    type : SET_JOB,
+    payload
+  }
+}
+const addJob = payload => {
+  return {
+    type : ADD_JOB,
+    payload
+  }
+}
+const deleteJob = payload => {
+  return {
+    type : DELETE_JOB,
+    payload
+  }
+}
+// 3 . Reducer
+const reducer = (state, action) => {
+    let newState
+
+      switch (action.type) {
+          case SET_JOB:
+              newState = {
+                ...state,
+                job: action.payload
+              }
+              break;
+          case ADD_JOB:
+              newState = {
+                ...state,
+                // job: '',
+                jobs: [...state.jobs, action.payload]
+              }
+              break;
+          case DELETE_JOB:
+            const newJobs = [...state.jobs]
+            newJobs.splice(action.payload,1)
+              newState = {
+                ...state,
+                jobs: newJobs
+              }
+              break;
+          default:
+            throw new Error('Invalid action')
+        
+      }
+
+
+    return newState
+}
+function   App() {
+    const [state,dispatch] = useReducer(reducer,initState)
+    const {job,jobs} = state
+
+    const inputRef = useRef()
+    const handleSubmit = () => {
+      dispatch(addJob(job))
+      dispatch(setJob(''))
+      inputRef.current.focus()
+    }
+    return (
+        <div style= {{padding: ' 0 20px'}}>
+            <h3>Todo</h3>
+            <input
+            ref={inputRef}
+            value = {job}
+            placeholder="Enter todo..."
+            onChange = { e => {
+              dispatch(setJob(e.target.value))
+            }}
+            />
+            <button onClick = {handleSubmit} >Add</button>
+            <ul>
+              {jobs.map((job, index) => (
+                <li key={index}>{job}
+                 <button onClick={() => dispatch(deleteJob(index))}>
+                 &times;
+                 </button>
+                 
+                 </li>
+              ))}
+            </ul>
+
+        </div>  
+    )
+}
+```
+`useContext` đơn giản hoá việc truyền dữ liệu từ component cha xuống component con mà không cần sử dụng tới props
+
+CompA => CompB => CompC
+
+- 1.Create context
+- 2.Provider
+- 3.Consumer

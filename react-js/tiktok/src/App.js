@@ -1,8 +1,32 @@
 
-import{useRef,useState,useEffect,useCallback} from 'react';
-
+import{useRef,useState,useEffect,useCallback, useMemo,memo,useReducer,createContext} from 'react';
 
 import Content from './Content'
+import './App.css'
+
+
+// import TodoApp from './Todo'
+
+
+
+export const ThemeContext = createContext()
+function App () {
+  const[ theme, setTheme] = useState('dark')
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+  return (
+    <ThemeContext.Provider value={theme}>
+   < div style={{padding : 20}}>
+    <button onClick={toggleTheme}>Toggle theme</button>
+     <Content/>
+   </div>
+   </ThemeContext.Provider>
+  )
+
+  // return <TodoApp />;
+}
+export default App;
 
 // const courses = [
 //   {
@@ -26,19 +50,216 @@ import Content from './Content'
 //     'Audi',
 //     'Porsche'
 // ]
-function   App() {
-  const [count, setCount] = useState(0);
-  const handleIncrease = () => {
-    setCount(prevCount => prevCount + 1)
-  }
-  return (
-    <div>
-      <Content onIncrease = {handleIncrease} />
-      <h1 style={{padding: 20}}>{count}</h1>
+
+//useState
+// 1. Init state : 0
+// 2 Actions : Up(state + 1), Down(state - 1)
+
+//useReducer
+// 1. Init state : 0
+// 2. Actions : Up(state + 1), Down(state - 1)
+// 3. Reducer 
+// 4. Dispatch
+
+//init 
+// const initState = 0
+// // actions
+// const UP_ACTION = 'up'
+// const DOWN_ACTION = 'down'
+// //reducer
+// const reducer = (state, action) => {
+//     switch(action) {
+//       case UP_ACTION: 
+//         return state + 1
+//       case DOWN_ACTION:
+//         return state - 1
+//       default:
+//         throw new Error('Invalid action')
+//     }
+// }
+
+
+// 1.Init state
+// const initState = {
+//   job: '',
+//   jobs: []
+// }
+// // 2. Actions
+// const SET_JOB = 'set_job'
+// const ADD_JOB = 'add_job'
+// const DELETE_JOB = 'delete_job'
+
+// const setJob = payload =>  {
+//   return {
+//     type : SET_JOB,
+//     payload
+//   }
+// }
+// const addJob = payload => {
+//   return {
+//     type : ADD_JOB,
+//     payload
+//   }
+// }
+// const deleteJob = payload => {
+//   return {
+//     type : DELETE_JOB,
+//     payload
+//   }
+// }
+// // 3 . Reducer
+// const reducer = (state, action) => {
+//     let newState
+
+//       switch (action.type) {
+//           case SET_JOB:
+//               newState = {
+//                 ...state,
+//                 job: action.payload
+//               }
+//               break;
+//           case ADD_JOB:
+//               newState = {
+//                 ...state,
+//                 // job: '',
+//                 jobs: [...state.jobs, action.payload]
+//               }
+//               break;
+//           case DELETE_JOB:
+//             const newJobs = [...state.jobs]
+//             newJobs.splice(action.payload,1)
+//               newState = {
+//                 ...state,
+//                 jobs: newJobs
+//               }
+//               break;
+//           default:
+//             throw new Error('Invalid action')
+        
+//       }
+
+
+//     return newState
+// }
+//function   App() {
+    // const [state,dispatch] = useReducer(reducer,initState)
+    // const {job,jobs} = state
+
+    // const inputRef = useRef()
+    // const handleSubmit = () => {
+    //   dispatch(addJob(job))
+    //   dispatch(setJob(''))
+    //   inputRef.current.focus()
+    // }
+    // return (
+    //     <div style= {{padding: ' 0 20px'}}>
+    //         <h3>Todo</h3>
+    //         <input
+    //         ref={inputRef}
+    //         value = {job}
+    //         placeholder="Enter todo..."
+    //         onChange = { e => {
+    //           dispatch(setJob(e.target.value))
+    //         }}
+    //         />
+    //         <button onClick = {handleSubmit} >Add</button>
+    //         <ul>
+    //           {jobs.map((job, index) => (
+    //             <li key={index}>{job}
+    //              <button onClick={() => dispatch(deleteJob(index))}>
+    //              &times;
+    //              </button>
+                 
+    //              </li>
+    //           ))}
+    //         </ul>
+
+    //     </div>  
+    // )
+
+
+
+//////////////////////////////////////////////////////
+// const [count, dispatch] = useReducer(reducer, initState)
+// return (
+//     <div style={{padding: ' 20px'}}>
+//       <h1>{count}</h1>
+//        <button 
+//        onClick={() => dispatch(UP_ACTION)}
+//        >Up
+//        </button>
+//        <button onClick={() => dispatch(DOWN_ACTION)}
+//        >Down
+//        </button>
+//     </div>
+// )
+
+//////////////////////////////////////////////////////////////////////
+// const [name,setName] = useState('');
+// const [price,setPrice] = useState('');
+// const [products,setProducts] = useState([])
+
+// const nameRef = useRef();
+// const handleSubmit = () => {
+//   setProducts ( [...products, {
+//     name,
+//     price : +price
+//   }])
+//   setName ( '')
+//   setPrice ('')
+//   nameRef.current.focus()
+// }
+// const total = useMemo(() => {
+//   const result = products.reduce ((result, prod) =>{
+
+//     return result + prod.price
+//   },0)
+//   return result
+// },[products])
+
+
+//  return (
+//    <div style={{padding: '10px 32px'}}>
+//     <input 
+//     ref={nameRef}
+//     value= {name}
+//     placeholder="Enter name ..."
+//     onChange={e => setName(e.target.value)}
+//     />
+//     <br />
+//     <input
+//     value={price}
+//     placeholder='Enter price...'
+//     onChange={e => setPrice(e.target.value)}
+//     />
+//     <br />
+//     <button onClick={handleSubmit}>Submit</button>
+//     <br />
+//     Total price :{total}
+//     <ul>
+//       {products.map((product,index) => (
+//         <li key={index}>{product.name} - {product.price}</li>
+//       ))}
+//     </ul>
+
+//    </div>
+//  )
+
+
+
+  /////////////////////////////////////////////
+  // const [count, setCount] = useState(0);
+  // const handleIncrease = () => {
+  //   setCount(prevCount => prevCount + 1)
+  // }
+  // return (
+  //   <div>
+  //     <Content onIncrease = {handleIncrease} />
+  //     <h1 style={{padding: 20}}>{count}</h1>
      
       
-    </div>
-  )
+  //   </div>
+  // )
 
 
 
@@ -207,6 +428,6 @@ function   App() {
 //       {show && <Content />}
 //     </div>
 //   );
-}
+//}
 
-export default App
+//export default App
