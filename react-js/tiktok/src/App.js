@@ -1,32 +1,80 @@
 
-import{useRef,useState,useEffect,useCallback, useMemo,memo,useReducer,createContext} from 'react';
-
-import Content from './Content'
-import './App.css'
-
-
-// import TodoApp from './Todo'
+// import{useRef,useState,useEffect,useCallback, useMemo,memo,useReducer,createContext} from 'react';
+import { useRef} from 'react'
+// import { useImperativeHandle} from 'react';
+import Video from './Video'
 
 
-
-export const ThemeContext = createContext()
 function App () {
-  const[ theme, setTheme] = useState('dark')
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
-  return (
-    <ThemeContext.Provider value={theme}>
-   < div style={{padding : 20}}>
-    <button onClick={toggleTheme}>Toggle theme</button>
-     <Content/>
-   </div>
-   </ThemeContext.Provider>
-  )
+  const videoRef = useRef()
 
-  // return <TodoApp />;
+  const handlePlay = () => {
+      videoRef.current.play()
+
+  }
+  const handlePause = () => {
+    videoRef.current.pause()
+  }
+    return (
+      <div>
+       <Video ref = {videoRef}/>
+       <button onClick={handlePlay}>Play</button>
+       <button onClick={handlePause}>Pause</button>
+      </div>
+    )
 }
 export default App;
+
+
+// import Content from './Content'
+// import './App.css'
+
+// import TodoApp from './Todo'
+// export const ThemeContext = createContext()
+// import {useStore, actions} from './store'
+// function App () {
+
+//   const [state, dispatch] =useStore()
+//   const {todos, todoInput} = state
+//   const handleAdd = () => {
+//     dispatch(actions.addTodo(todoInput))
+//   }
+//   return (
+//         <div>
+//           <input 
+//               value = {todoInput}
+//               placeholder='Enter Todo...'
+//               onChange={e => {
+//                 dispatch(actions.setTodoInput(e.target.value))
+//               }}
+//           />
+//           <button style={{padding: '10px 10px'}} onClick = {handleAdd}>Add</button>
+
+//           {todos.map((todo, index)=> (
+//             <li key={index}>{todo}</li>
+//           ))}
+
+
+//         </div>
+
+      
+//   )
+  // const[ theme, setTheme] = useState('dark')
+  // const toggleTheme = () => {
+  //   setTheme(theme === 'dark' ? 'light' : 'dark')
+  // }
+  // return (
+  //   <ThemeContext.Provider value={theme}>
+  //  < div style={{padding : 20}}>
+  //   <button onClick={toggleTheme}>Toggle theme</button>
+  //    <Content/>
+  //  </div>
+  //  </ThemeContext.Provider>
+  // )
+
+//   // return <TodoApp />;
+// }
+// export default App;
 
 // const courses = [
 //   {
