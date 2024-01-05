@@ -21,6 +21,7 @@ function App () {
        <button onClick={handlePlay}>Play</button>
        <button onClick={handlePause}>Pause</button>
       </div>
+      
     )
 }
 export default App;
