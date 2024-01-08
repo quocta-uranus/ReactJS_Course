@@ -1,31 +1,85 @@
-
 // import{useRef,useState,useEffect,useCallback, useMemo,memo,useReducer,createContext} from 'react';
-import { useRef} from 'react'
+// import { useRef } from "react";
 // import { useImperativeHandle} from 'react';
-import Video from './Video'
+// import Video from "./Video";
 
+// import Heading from './components/Heading'
+// import Paragraph from './components/Paragraph'
 
-function App () {
-  const videoRef = useRef()
+// import Button from './components/Button'
+// import GlobalStyles from './components/GlobalStyles';
 
-  const handlePlay = () => {
-      videoRef.current.play()
+// function App () {
+//     return (
+//         <GlobalStyles>
+//             <div style = {{padding: '10px 32px'}}>
+//             <Button/>
+//             <Button primary/>
+//             <Button disabled/>
 
-  }
-  const handlePause = () => {
-    videoRef.current.pause()
-  }
-    return (
-      <div>
-       <Video ref = {videoRef}/>
-       <button onClick={handlePlay}>Play</button>
-       <button onClick={handlePause}>Pause</button>
-      </div>
-      
-    )
+//             </div>
+//         </GlobalStyles>
+//     )
+
+// }
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
+import NewsPage from "./pages/News";
+import ContactPage from "./pages/Contact";
+
+function App() {
+  return (
+    <div className="app">
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/news">News</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </div>
+  );
 }
-export default App;
 
+export default App;
+// function App () {
+//     return (
+//         <div style={{padding : "0 32px"}}>
+//             <Heading/>
+//             <Paragraph/>
+//         </div>
+//     )
+// }
+// function App() {
+//   const videoRef = useRef();
+
+//   const handlePlay = () => {
+//     videoRef.current.play();
+//   };
+//   const handlePause = () => {
+//     videoRef.current.pause();
+//   };
+//   return (
+//     <div>
+//       <Video ref={videoRef} />
+//       <button onClick={handlePlay}>Play</button>
+//       <button onClick={handlePause}>Pause</button>
+//     </div>
+//   );
+// }
+// export default App;
 
 // import Content from './Content'
 // import './App.css'
@@ -42,7 +96,7 @@ export default App;
 //   }
 //   return (
 //         <div>
-//           <input 
+//           <input
 //               value = {todoInput}
 //               placeholder='Enter Todo...'
 //               onChange={e => {
@@ -55,23 +109,21 @@ export default App;
 //             <li key={index}>{todo}</li>
 //           ))}
 
-
 //         </div>
 
-      
 //   )
-  // const[ theme, setTheme] = useState('dark')
-  // const toggleTheme = () => {
-  //   setTheme(theme === 'dark' ? 'light' : 'dark')
-  // }
-  // return (
-  //   <ThemeContext.Provider value={theme}>
-  //  < div style={{padding : 20}}>
-  //   <button onClick={toggleTheme}>Toggle theme</button>
-  //    <Content/>
-  //  </div>
-  //  </ThemeContext.Provider>
-  // )
+// const[ theme, setTheme] = useState('dark')
+// const toggleTheme = () => {
+//   setTheme(theme === 'dark' ? 'light' : 'dark')
+// }
+// return (
+//   <ThemeContext.Provider value={theme}>
+//  < div style={{padding : 20}}>
+//   <button onClick={toggleTheme}>Toggle theme</button>
+//    <Content/>
+//  </div>
+//  </ThemeContext.Provider>
+// )
 
 //   // return <TodoApp />;
 // }
@@ -83,9 +135,9 @@ export default App;
 //     name : 'HTML, CSS, JS'
 //   },
 //   {
-//     id : 2, 
+//     id : 2,
 //     name : 'ReactJS'
-  
+
 //   },
 //   {
 //     id : 3,
@@ -107,10 +159,10 @@ export default App;
 //useReducer
 // 1. Init state : 0
 // 2. Actions : Up(state + 1), Down(state - 1)
-// 3. Reducer 
+// 3. Reducer
 // 4. Dispatch
 
-//init 
+//init
 // const initState = 0
 // // actions
 // const UP_ACTION = 'up'
@@ -118,7 +170,7 @@ export default App;
 // //reducer
 // const reducer = (state, action) => {
 //     switch(action) {
-//       case UP_ACTION: 
+//       case UP_ACTION:
 //         return state + 1
 //       case DOWN_ACTION:
 //         return state - 1
@@ -126,7 +178,6 @@ export default App;
 //         throw new Error('Invalid action')
 //     }
 // }
-
 
 // 1.Init state
 // const initState = {
@@ -170,7 +221,7 @@ export default App;
 //           case ADD_JOB:
 //               newState = {
 //                 ...state,
-//                 // job: '',
+// job: '',
 //                 jobs: [...state.jobs, action.payload]
 //               }
 //               break;
@@ -184,56 +235,53 @@ export default App;
 //               break;
 //           default:
 //             throw new Error('Invalid action')
-        
-//       }
 
+//       }
 
 //     return newState
 // }
 //function   App() {
-    // const [state,dispatch] = useReducer(reducer,initState)
-    // const {job,jobs} = state
+// const [state,dispatch] = useReducer(reducer,initState)
+// const {job,jobs} = state
 
-    // const inputRef = useRef()
-    // const handleSubmit = () => {
-    //   dispatch(addJob(job))
-    //   dispatch(setJob(''))
-    //   inputRef.current.focus()
-    // }
-    // return (
-    //     <div style= {{padding: ' 0 20px'}}>
-    //         <h3>Todo</h3>
-    //         <input
-    //         ref={inputRef}
-    //         value = {job}
-    //         placeholder="Enter todo..."
-    //         onChange = { e => {
-    //           dispatch(setJob(e.target.value))
-    //         }}
-    //         />
-    //         <button onClick = {handleSubmit} >Add</button>
-    //         <ul>
-    //           {jobs.map((job, index) => (
-    //             <li key={index}>{job}
-    //              <button onClick={() => dispatch(deleteJob(index))}>
-    //              &times;
-    //              </button>
-                 
-    //              </li>
-    //           ))}
-    //         </ul>
+// const inputRef = useRef()
+// const handleSubmit = () => {
+//   dispatch(addJob(job))
+//   dispatch(setJob(''))
+//   inputRef.current.focus()
+// }
+// return (
+//     <div style= {{padding: ' 0 20px'}}>
+//         <h3>Todo</h3>
+//         <input
+//         ref={inputRef}
+//         value = {job}
+//         placeholder="Enter todo..."
+//         onChange = { e => {
+//           dispatch(setJob(e.target.value))
+//         }}
+//         />
+//         <button onClick = {handleSubmit} >Add</button>
+//         <ul>
+//           {jobs.map((job, index) => (
+//             <li key={index}>{job}
+//              <button onClick={() => dispatch(deleteJob(index))}>
+//              &times;
+//              </button>
 
-    //     </div>  
-    // )
+//              </li>
+//           ))}
+//         </ul>
 
+//     </div>
+// )
 
-
-//////////////////////////////////////////////////////
+////////////////////////////////////////////
 // const [count, dispatch] = useReducer(reducer, initState)
 // return (
 //     <div style={{padding: ' 20px'}}>
 //       <h1>{count}</h1>
-//        <button 
+//        <button
 //        onClick={() => dispatch(UP_ACTION)}
 //        >Up
 //        </button>
@@ -266,10 +314,9 @@ export default App;
 //   return result
 // },[products])
 
-
 //  return (
 //    <div style={{padding: '10px 32px'}}>
-//     <input 
+//     <input
 //     ref={nameRef}
 //     value= {name}
 //     placeholder="Enter name ..."
@@ -294,48 +341,43 @@ export default App;
 //    </div>
 //  )
 
+/////////////////////////////////////////////
+// const [count, setCount] = useState(0);
+// const handleIncrease = () => {
+//   setCount(prevCount => prevCount + 1)
+// }
+// return (
+//   <div>
+//     <Content onIncrease = {handleIncrease} />
+//     <h1 style={{padding: 20}}>{count}</h1>
 
+//   </div>
+// )
 
-  /////////////////////////////////////////////
-  // const [count, setCount] = useState(0);
-  // const handleIncrease = () => {
-  //   setCount(prevCount => prevCount + 1)
-  // }
-  // return (
-  //   <div>
-  //     <Content onIncrease = {handleIncrease} />
-  //     <h1 style={{padding: 20}}>{count}</h1>
-     
-      
-  //   </div>
-  // )
+////////////////////////////////////////////////////////////////////////
+// const [count, setCount] = useState(60);
+// const timerId = useRef();
+// const prevCount = useRef();
+// useEffect(() => {
+//   prevCount.current = count;
+// },[count])
 
-
-
-  ////////////////////////////////////////////////////////////////////////
-    // const [count, setCount] = useState(60);
-    // const timerId = useRef();
-    // const prevCount = useRef();
-    // useEffect(() => {
-    //   prevCount.current = count;
-    // },[count])
-
-    // const handleStart = () => {
-    //  timerId.current= setInterval(() => {
-    //     setCount((prevCount) => prevCount - 1)
-    //   },1000)
-    // }
-    // const handleStop = () => {
-    //   clearInterval(timerId.current);
-    // }
-    // return (
-    //     <div>
-    //         <h1 style={{padding: 20}}>{count}</h1>
-    //         <button  onClick = {handleStart}>Start</button>
-    //         <button onClick = {handleStop}>Stop</button>
-    //     </div>
-    // )
-  ////////////////////////////////////////////////////////////////////////
+// const handleStart = () => {
+//  timerId.current= setInterval(() => {
+//     setCount((prevCount) => prevCount - 1)
+//   },1000)
+// }
+// const handleStop = () => {
+//   clearInterval(timerId.current);
+// }
+// return (
+//     <div>
+//         <h1 style={{padding: 20}}>{count}</h1>
+//         <button  onClick = {handleStart}>Start</button>
+//         <button onClick = {handleStop}>Stop</button>
+//     </div>
+// )
+////////////////////////////////////////////////////////////////////////
 //     const [gift, setGift] = useState()
 //     const randomGift = () => {
 //         const index = Math.floor(Math.random() * gifts.length)
@@ -367,7 +409,7 @@ export default App;
 //   // }
 //   // return (
 //   //   <div className="App" style={{textAlign:"center"}}>
-//   //     <h1 > {JSON.stringify(info)}</h1> 
+//   //     <h1 > {JSON.stringify(info)}</h1>
 //   //     <button onClick = {handleUpdate}>Update</button>
 //   //   </div>
 //   // )
@@ -404,9 +446,8 @@ export default App;
 //       </div>
 //   )
 ///////////////////////////////////////////////////
-  
 
-// const [checked, setChecked] = useState([]) 
+// const [checked, setChecked] = useState([])
 
 // const handleCheck = (id) => {
 //   setChecked(prev => {
@@ -424,7 +465,7 @@ export default App;
 //     {courses.map(course => (
 //       <div key = {course.id}>
 //         <input
-//         //  type = "radio" 
+//  type = "radio"
 //         type = "checkbox"
 //         checked={checked.includes(course.id)}
 //         onChange = {() => handleCheck(course.id)}
@@ -452,7 +493,7 @@ export default App;
 
 //     <div className="App" style={{padding : 32}}>
 //       <input
-//        value={job} 
+//        value={job}
 //        onChange={e => setJob(e.target.value)}
 //        />
 //       <button onClick = {handleSubmit}>ADD</button>

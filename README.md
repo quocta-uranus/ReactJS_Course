@@ -822,3 +822,46 @@ function Video(props, ref) {
 }
 export default forwardRef(Video)
 ```
+
+CSS module
+```JavaScript
+import Heading from './components/Heading'
+import Paragraph from './components/Paragraph'
+
+
+function App () {
+    return (
+        <div style={{padding : "0 32px"}}>
+            <Heading/>
+            <Paragraph/>
+        </div>
+    )
+}
+
+export default App;
+
+```
+```JavaScript
+  import styles from './Heading.module.css'
+
+function Heading() {
+    return (
+        <h1 className={styles.heading}>
+            TRAN ANH QUOC
+        </h1>
+    )
+}
+export default Heading ;
+
+
+```
+```JavaScript
+import styles from './Paragraph.module.css'
+
+function Paragraph () {
+    return (
+        <p className = {styles.paragraph}>From Uranus, DA NANG</p>
+    )
+}
+export default Paragraph
+```
