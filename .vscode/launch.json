@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/macos/Documents/C_Course_FPT/C_Course",
+      "program": "/Users/macos/Documents/C_Course_FPT/C_Course/build/Debug/outDebug"
+    }
+  ]
+}
